@@ -12,12 +12,14 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="w-full">
-        <h1 className="text-4xl font-heading mb-3 text-heading font-bold mb-8 md:mb-4">Sign In</h1>
-        <p className="text-body mb-8">
+        <h1 className="text-4xl font-heading mb-3 text-heading font-normal mb-2">
+          Sign In
+        </h1>
+        <p className="font-sans text-body mb-8">
           Don’t have an account yet?{" "}
           <Link
             to="/signup"
-            className="text-green-500 font-bold hover:underline"
+            className="text-[#00BFFF] font-bold hover:underline"
           >
             Sign Up
           </Link>
@@ -36,20 +38,25 @@ const Login = () => {
             <label className="flex items-center gap-2 cursor-pointer text-body">
               <input
                 type="checkbox"
-                className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+                className="w-4 h-4 rounded border-gray-300 text-[#001F3F] focus:ring-[#001F3F]"
               />
               Remember me
             </label>
 
             <Link
               to="/forgot-password"
-              className="font-bold text-heading hover:underline"
+              className="font-bold text-heading hover:underline text-[#001F3F]"
             >
               Forgot Password?
             </Link>
           </div>
 
-          <Button type="submit">Sign In</Button>
+          <Button
+            type="submit"
+            className="!bg-[#001F3F] hover:!bg-[#001F3F]/90 text-white w-full"
+          >
+            Sign In
+          </Button>
         </form>
       </div>
     </AuthLayout>

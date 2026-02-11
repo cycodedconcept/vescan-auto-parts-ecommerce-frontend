@@ -1,21 +1,21 @@
+import loginImage from "../assets/loginimage.jpg";
+import logo from "../assets/logo4.png";
+
 const AuthLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen w-full flex-col lg:flex-row">
-      {/* Image Section - Stacked on mobile, Left side on Desktop */}
-      <div className="relative h-[300px] w-full lg:h-auto lg:w-[736px] lg:shrink-0 bg-gray-200 overflow-hidden">
-        {/* Placeholder for the 736x1080 image */}
-        <div className="absolute inset-0 flex items-center justify-center text-gray-400 bg-gray-300">
-          {/* Replace with actual image later */}
-          <span className="font-heading text-2xl">
-            Image Placeholder (736x1080)
-          </span>
-        </div>
-
-        {/* Logo Overlay (Optional based on design) */}
-        <div className="absolute top-6 left-6 lg:top-8 lg:left-8">
-          <span className="font-heading text-2xl font-bold text-white drop-shadow-md">
-            VESCAN
-          </span>
+      {/* Image Section - 50% width on Desktop */}
+      <div className="relative h-[430px]  w-full lg:h-auto lg:w-1/2 lg:shrink-0 bg-gray-900 overflow-hidden">
+        <img
+          src={loginImage}
+          alt="Authentication Background"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30"></div>{" "}
+        {/* Dark Overlay */}
+        {/* Logo Overlay */}
+        <div className="absolute top-8 left-0 right-0 flex justify-center">
+          <img src={logo} alt="Vescan Logo" className="h-12 w-auto" />
         </div>
       </div>
 

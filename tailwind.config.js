@@ -8,6 +8,8 @@ export default {
         // Let's add specific text colors
         heading: "#141718",
         body: "#7C797A",
+        "footer-bg": "#001326",
+        "footer-text": "#E8ECEF",
         // Keeping these for potential use or until clarified
         accent: "#F59E0B",
         blue: "#2563EB",

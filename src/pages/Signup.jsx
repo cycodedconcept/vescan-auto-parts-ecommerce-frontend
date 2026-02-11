@@ -12,12 +12,14 @@ const Signup = () => {
   return (
     <AuthLayout>
       <div className="w-full">
-        <h1 className="text-4xl font-heading mb-3 text-heading font-bold mb-4">Sign Up</h1>
-        <p className="text-body mb-8">
+        <h1 className="text-4xl font-heading mb-3 text-heading font-normal mb-4">
+          Sign Up
+        </h1>
+        <p className="font-sans text-body mb-8">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-green-500 font-bold hover:underline"
+            className="text-[#00BFFF] font-bold hover:underline"
           >
             Sign In
           </Link>
@@ -36,7 +38,7 @@ const Signup = () => {
             <input
               type="checkbox"
               id="agree-terms"
-              className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+              className="w-4 h-4 rounded border-gray-300 text-[#001F3F] focus:ring-[#001F3F]"
               required
             />
             <label htmlFor="agree-terms" className="cursor-pointer">
@@ -51,7 +53,12 @@ const Signup = () => {
             </label>
           </div>
 
-          <Button type="submit">Sign Up</Button>
+          <Button
+            type="submit"
+            className="!bg-[#001F3F] hover:!bg-[#001F3F]/90 text-white w-full text-base"
+          >
+            Sign Up
+          </Button>
         </form>
       </div>
     </AuthLayout>
