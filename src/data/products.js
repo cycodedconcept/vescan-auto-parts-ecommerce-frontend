@@ -7,9 +7,25 @@ export const products = [
     rating: 5,
     reviews: 12,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png", // Clutch/Part placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+    ],
     badges: ["HOT"],
     isNew: false,
+    description:
+      "Made with high-quality materials and advanced friction formulations, the ClutchForce kit ensures a longer lifespan and consistent clutch performance.",
+    sku: "1101",
+    category: "Clutch Kits",
+    measurements: '12 3/4x8 1/2"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 2,
@@ -19,9 +35,25 @@ export const products = [
     rating: 5,
     reviews: 8,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png", // Car part placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+    ],
     badges: ["HOT", "-50%"],
     isNew: false,
+    description:
+      "Engineered for maximum efficiency, the VoltMaster alternator delivers reliable power output and extended durability for all vehicle types.",
+    sku: "1102",
+    category: "Spark Plugs",
+    measurements: '10 1/4x6 3/8"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 3,
@@ -31,9 +63,25 @@ export const products = [
     rating: 5,
     reviews: 24,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635087/3d_style_mechanical_item_-12-removebg-preview_bzbhry.png", // Shock absorber placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635087/3d_style_mechanical_item_-12-removebg-preview_bzbhry.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635087/3d_style_mechanical_item_-12-removebg-preview_bzbhry.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635087/3d_style_mechanical_item_-12-removebg-preview_bzbhry.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635087/3d_style_mechanical_item_-12-removebg-preview_bzbhry.png",
+    ],
     badges: ["HOT"],
     isNew: true,
+    description:
+      "Buy one or buy a few and make every space where you sit more convenient. Light and easy to move around with removable tray top, handy for serving snacks.",
+    sku: "1117",
+    category: "Oil Filters",
+    measurements: '17 1/2x20 5/8 "',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 4,
@@ -43,9 +91,25 @@ export const products = [
     rating: 5,
     reviews: 6,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635199/3d-rendering-hydraulic-elements-removebg-preview_u2bitx.png", // Oil/Fluid placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635199/3d-rendering-hydraulic-elements-removebg-preview_u2bitx.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635199/3d-rendering-hydraulic-elements-removebg-preview_u2bitx.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635199/3d-rendering-hydraulic-elements-removebg-preview_u2bitx.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635199/3d-rendering-hydraulic-elements-removebg-preview_u2bitx.png",
+    ],
     badges: ["HOT"],
     isNew: false,
+    description:
+      "Premium synthetic transmission fluid designed for smooth gear shifts and optimal protection against wear, heat, and oxidation.",
+    sku: "1104",
+    category: "Fuel Pumps",
+    measurements: '8 x 5 1/4"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 5,
@@ -55,9 +119,25 @@ export const products = [
     rating: 5,
     reviews: 15,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png", // Filter placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+    ],
     badges: ["HOT", "-50%"],
     isNew: false,
+    description:
+      "Advanced filtration technology that captures 99.9% of harmful particles while maintaining optimal airflow for peak engine performance.",
+    sku: "1105",
+    category: "Wheel Bearings",
+    measurements: '14 x 9 3/4"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 6,
@@ -67,9 +147,25 @@ export const products = [
     rating: 5,
     reviews: 15,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png", // Filter placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634967/10875-removebg-preview_zmh3kd.png",
+    ],
     badges: ["HOT", "-50%"],
     isNew: false,
+    description:
+      "Advanced filtration technology that captures 99.9% of harmful particles while maintaining optimal airflow for peak engine performance.",
+    sku: "1106",
+    category: "Spark Plugs",
+    measurements: '14 x 9 3/4"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 7,
@@ -79,9 +175,25 @@ export const products = [
     rating: 5,
     reviews: 15,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png", // Filter placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png",
+    ],
     badges: ["HOT", "-50%"],
     isNew: false,
+    description:
+      "Advanced filtration technology that captures 99.9% of harmful particles while maintaining optimal airflow for peak engine performance.",
+    sku: "1107",
+    category: "Control Arms",
+    measurements: '14 x 9 3/4"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
   {
     id: 8,
@@ -91,8 +203,24 @@ export const products = [
     rating: 5,
     reviews: 15,
     image:
-      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png", // Filter placeholder
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+    gallery: [
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635306/Ball_bearing_made_of_bronze_with_threads_on_the_outside_-7-removebg-preview_pxtogp.png",
+    ],
     badges: ["HOT", "-50%"],
     isNew: false,
+    description:
+      "Advanced filtration technology that captures 99.9% of harmful particles while maintaining optimal airflow for peak engine performance.",
+    sku: "1108",
+    category: "Wheel Bearings",
+    measurements: '14 x 9 3/4"',
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Silver", hex: "#C0C0C0" },
+      { name: "Red", hex: "#DC2626" },
+      { name: "White", hex: "#F5F5F5" },
+    ],
   },
 ];

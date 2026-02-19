@@ -40,6 +40,19 @@ export const categories = [
     image:
       "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635759/different-car-accessories-arrangement-removebg-preview_bjnodc.png", // Clutch placeholder
     slug: "clutch-kits",
-  }
-
+  },
+  {
+    id: 7,
+    name: "Engine",
+    image:
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770634714/different-car-accessories-composition-removebg-preview_pxiuwp.png", // Clutch placeholder reused
+    slug: "engine",
+  },
+  {
+    id: 8,
+    name: "Transmission",
+    image:
+      "https://res.cloudinary.com/dmymwlqqw/image/upload/v1770635831/bolts-nuts-removebg-preview_oeua4o.png", // Control Arms placeholder reused
+    slug: "transmission",
+  },
 ];

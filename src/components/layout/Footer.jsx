@@ -75,7 +75,7 @@ const Footer = () => {
           {/* Right: Payment Icons */}
           <div className="flex items-center gap-2 order-1 md:order-2">
             {[
-              { name: "Visa", src: "/src/assets/icons/Visa.png" },
+              { name: "Visa", src: "/src/assets/icons/visa.png" },
               { name: "AMEX", src: "/src/assets/icons/AMEX.png" },
               { name: "Mastercard", src: "/src/assets/icons/Mastercard.png" },
               { name: "Stripe", src: "/src/assets/icons/Stripe.png" },

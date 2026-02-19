@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import ProductCard from "../common/ProductCard";
 import { products } from "../../data/products";
 
@@ -46,9 +47,22 @@ const FeaturedProducts = () => {
   return (
     <section className="container mx-auto px-6 md:px-12 lg:px-28 py-16">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-heading text-3xl md:text-4xl font-medium text-heading">
-          Featured
-        </h2>
+        <div className="flex items-center gap-3">
+          <h2 className="font-heading text-3xl md:text-4xl font-medium text-heading">
+            Featured
+          </h2>
+          <div className="relative">
+            <select className="appearance-none border border-[#001F3F] rounded px-3 py-2 pr-6 w-[85px] font-sans font-bold text-sm text-[#001F3F] bg-white focus:outline-none cursor-pointer truncate">
+              <option value="new">New</option>
+              <option value="popular">Popular</option>
+              <option value="best-selling">Best Selling</option>
+            </select>
+            <ChevronDown
+              size={14}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-[#001F3F] pointer-events-none"
+            />
+          </div>
+        </div>
 
         {/* Custom Navigation Dots - Radio Style */}
         <div className="flex items-center gap-2">

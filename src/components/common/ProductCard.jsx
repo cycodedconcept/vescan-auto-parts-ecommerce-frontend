@@ -1,11 +1,23 @@
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart, openFlyout } = useCart();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    addToCart(product);
+    openFlyout();
+  };
+
   return (
     <div className="group relative flex flex-col gap-3 min-w-[260px] md:min-w-[280px]">
       {/* Image Container */}
-      <div className="relative w-full aspect-square bg-[#F3F5F7] rounded-lg overflow-hidden flex items-center justify-center p-4">
+      <Link
+        to={`/product/${product.id}`}
+        className="relative w-full aspect-square bg-[#F3F5F7] rounded-lg overflow-hidden flex items-center justify-center p-4"
+      >
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
           {product.badges.map((badge, index) => (
@@ -31,11 +43,14 @@ const ProductCard = ({ product }) => {
 
         {/* Hover Action - Add to Cart */}
         <div className="absolute bottom-0 left-0 w-full p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
-          <button className="w-full bg-heading text-white font-sans font-medium py-3 rounded-md hover:bg-black transition-colors shadow-lg">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-heading text-white font-sans font-medium py-3 rounded-md hover:bg-black transition-colors shadow-lg"
+          >
             Add To Cart
           </button>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className="flex flex-col gap-1">

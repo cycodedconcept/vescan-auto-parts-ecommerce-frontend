@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, User, ShoppingBag, ChevronDown, Menu } from "lucide-react";
+import {
+  Search,
+  CircleUser,
+  ShoppingBag,
+  ChevronDown,
+  Menu,
+} from "lucide-react";
 import logo from "../../assets/logo3.png";
+import { useCart } from "../../context/CartContext";
 
 const Header = () => {
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { cartCount, openFlyout } = useCart();
 
   const navLinkStyles =
     "text-sm font-sans text-heading leading-6 hover:text-gray-600 transition-colors flex items-center gap-1";
@@ -42,9 +50,9 @@ const Header = () => {
             onMouseEnter={() => setIsShopOpen(true)}
             onMouseLeave={() => setIsShopOpen(false)}
           >
-            <button className={navLinkStyles}>
+            <Link to="/shop" className={navLinkStyles}>
               Shop <ChevronDown size={14} />
-            </button>
+            </Link>
 
             {/* Dropdown Menu - 2 Columns */}
             <div
@@ -92,7 +100,7 @@ const Header = () => {
             </div>
           </div>
 
-          <Link to="/product" className={navLinkStyles}>
+          <Link to="/shop" className={navLinkStyles}>
             Product
           </Link>
           <Link to="/blog" className={navLinkStyles}>
@@ -112,17 +120,19 @@ const Header = () => {
             to="/login"
             className="hidden md:block hover:text-gray-600 transition-colors"
           >
-            <User size={20} strokeWidth={1.5} />
+            <CircleUser size={20} strokeWidth={1.5} />
           </Link>
-          <Link
-            to="/cart"
+          <button
+            onClick={openFlyout}
             className="relative hover:text-gray-600 transition-colors"
           >
             <ShoppingBag size={20} strokeWidth={1.5} />
-            <span className="absolute -top-1 -right-1 bg-heading text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">
-              2
-            </span>
-          </Link>
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-heading text-white text-[10px] font-bold h-4 w-4 flex items-center justify-center rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </button>
         </div>
       </div>
 
@@ -180,7 +190,7 @@ const Header = () => {
             className="flex items-center gap-2 text-heading font-medium"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <User size={20} /> Login
+            <CircleUser size={20} /> Login
           </Link>
         </div>
       </div>
