@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-footer-bg text-footer-text font-sans text-sm w-full border-t border-gray-800">
       <div className="container mx-auto px-4 md:px-8 lg:px-28 py-12 min-h-[289px] flex flex-col justify-between items-center md:items-start">
         {/* Top Row: Logo & Nav */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-12 md:gap-6">
           {/* Left: Logo & Tagline */}
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
             <Link to="/" className="flex-shrink-0">
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           {/* Right: Navigation */}
-          <nav className="flex flex-col md:flex-row items-center gap-4 md:gap-8 font-medium">
+          <nav className="flex flex-col md:flex-row items-center gap-8 font-medium">
             <Link to="/" className="hover:text-white transition-colors">
               Home
             </Link>
@@ -51,10 +51,10 @@ const Footer = () => {
         <div className="h-px w-full bg-[#7C797A] my-8"></div>
 
         {/* Bottom Row: Legal & Payments */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-12 md:gap-6 text-center md:text-left">
           {/* Left: Copyright & Links */}
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-xs text-footer-text order-2 md:order-1">
-            <span>Copyright © 2024 Vescan. All Rights Reserved</span>
+          <div className="flex flex-col-reverse md:flex-row items-center gap-8 text-xs text-footer-text order-2 md:order-1 mt-4 md:mt-0">
+            <span>Copyright © 2024 Vescan. All Rights Reserved.</span>
             <div className="hidden md:block h-3 w-px bg-gray-600"></div>
             <div className="flex gap-6 text-[#7C797A]">
               <Link
