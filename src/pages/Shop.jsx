@@ -119,19 +119,18 @@ const FilterDropdown = ({
   options,
   value,
   onChange,
-  width,
+  widthClass = "w-full md:w-[140px]",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="md:flex-none relative" style={{ width: undefined }}>
+    <div className={`relative ${widthClass}`}>
       <label className="block text-xs uppercase tracking-wider text-[#7C797A] mb-1.5 font-bold">
         {label}
       </label>
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="flex items-center justify-between border-2 border-[#7C797A] rounded-lg px-5 py-2.5 font-sans text-sm text-heading bg-white"
-        style={{ width: width || "100%" }}
+        className="flex w-full items-center justify-between border-2 border-[#7C797A] rounded-lg px-5 py-2.5 font-sans text-sm text-heading bg-white"
       >
         <span>{displayLabel}</span>
         <ChevronDown
@@ -142,10 +141,7 @@ const FilterDropdown = ({
         />
       </button>
       {isOpen && (
-        <div
-          className="mt-1 md:absolute md:top-full md:left-0 md:bg-white md:shadow-lg md:border md:border-gray-100 md:rounded-lg md:z-20"
-          style={{ width: width || "100%" }}
-        >
+        <div className="mt-1 w-full md:absolute md:top-full md:left-0 md:bg-white md:shadow-lg md:border md:border-gray-100 md:rounded-lg md:z-20">
           {options.map((opt) => (
             <button
               key={opt}
@@ -236,7 +232,7 @@ const Shop = () => {
             options={["New", "Tokunbo"]}
             value={typeFilter}
             onChange={setTypeFilter}
-            width="140px"
+            widthClass="w-full md:w-[140px]"
           />
 
           {/* CATEGORIES */}
@@ -246,7 +242,7 @@ const Shop = () => {
             options={categories}
             value={categoryFilter}
             onChange={setCategoryFilter}
-            width="240px"
+            widthClass="w-full md:w-[240px]"
           />
 
           {/* PRICE */}
@@ -262,7 +258,7 @@ const Shop = () => {
             ]}
             value={priceFilter}
             onChange={setPriceFilter}
-            width="240px"
+            widthClass="w-full md:w-[240px]"
           />
         </div>
 

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Minus, Plus, X, Ticket } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Minus, Plus, X, Ticket, ChevronLeft } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, subtotal } = useCart();
+  const navigate = useNavigate();
   const [shipping, setShipping] = useState("free");
   const [coupon, setCoupon] = useState("");
 
@@ -19,40 +20,46 @@ const Cart = () => {
   return (
     <div className="container mx-auto px-6 md:px-12 lg:px-28 py-8 md:py-12">
       {/* Heading */}
-      <h1 className="font-heading text-4xl md:text-5xl text-center mb-8">
-        Cart
-      </h1>
+      <div className="relative mb-8 text-center flex items-center justify-center">
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute left-0 flex items-center md:hidden text-gray-500 font-sans text-sm"
+        >
+          <ChevronLeft size={16} className="mr-0.5" /> back
+        </button>
+        <h1 className="font-heading text-4xl md:text-5xl">Cart</h1>
+      </div>
 
       {/* Progress Stepper */}
-      <div className="flex items-center justify-center gap-0 mb-12 max-w-xl mx-auto">
+      <div className="flex items-center justify-between md:justify-center gap-0 mb-12 max-w-xl mx-auto px-4 md:px-0">
         {/* Step 1 */}
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-heading text-white text-sm font-bold flex items-center justify-center">
+        <div className="flex items-center gap-2 border-b-2 border-heading pb-3 md:pb-0 md:border-none px-4 md:px-0 flex-1 md:flex-none justify-center">
+          <span className="w-8 h-8 rounded-full bg-heading flex-shrink-0 text-white text-sm font-bold flex items-center justify-center">
             1
           </span>
-          <span className="font-sans text-sm font-medium text-heading">
+          <span className="font-sans text-sm font-bold text-heading whitespace-nowrap">
             Shopping cart
           </span>
         </div>
-        <div className="flex-1 h-px bg-heading mx-2" />
+        <div className="hidden md:block flex-1 h-px bg-heading mx-2" />
 
         {/* Step 2 */}
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-gray-200 text-gray-400 text-sm font-bold flex items-center justify-center">
+        <div className="flex items-center gap-2 pb-3 md:pb-0 justify-center">
+          <span className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0 text-white text-sm font-bold flex items-center justify-center">
             2
           </span>
-          <span className="font-sans text-sm text-gray-400">
+          <span className="hidden md:inline font-sans text-sm text-gray-400">
             Checkout details
           </span>
         </div>
-        <div className="flex-1 h-px bg-gray-200 mx-2" />
+        <div className="hidden md:block flex-1 h-px bg-gray-200 mx-2" />
 
         {/* Step 3 */}
-        <div className="flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-gray-200 text-gray-400 text-sm font-bold flex items-center justify-center">
+        <div className="hidden md:flex items-center gap-2">
+          <span className="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 text-gray-400 text-sm font-bold flex items-center justify-center">
             3
           </span>
-          <span className="font-sans text-sm text-gray-400">
+          <span className="hidden md:inline font-sans text-sm text-gray-400">
             Order complete
           </span>
         </div>
@@ -73,7 +80,12 @@ const Cart = () => {
       ) : (
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* ── Left: Cart Items ── */}
-          <div className="flex-1">
+          <div className="flex-1 overflow-y-auto max-h-[50vh] md:max-h-none pr-1 custom-scrollbar">
+            {/* Mobile Table Header */}
+            <div className="md:hidden pb-4 border-b border-gray-200 mb-2 font-sans text-sm font-bold text-heading sticky top-0 bg-white z-10">
+              Product
+            </div>
+
             {/* Desktop Table Header */}
             <div className="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-gray-200">
               <span className="col-span-5 font-sans text-sm font-medium text-heading">
@@ -92,68 +104,130 @@ const Cart = () => {
 
             {/* Cart Items */}
             {cart.map((item) => (
-              <div
-                key={item.id}
-                className="grid grid-cols-12 gap-4 items-center py-6 border-b border-gray-100"
-              >
-                {/* Product Info */}
-                <div className="col-span-12 md:col-span-5 flex items-center gap-4">
-                  <div className="w-20 h-20 bg-[#F3F5F7] rounded-md flex items-center justify-center flex-shrink-0">
+              <div key={item.id}>
+                {/* Desktop View */}
+                <div className="hidden md:grid grid-cols-12 gap-4 items-center py-6 border-b border-gray-100">
+                  {/* Product Info */}
+                  <div className="col-span-12 md:col-span-5 flex items-center gap-4">
+                    <div className="w-20 h-20 bg-[#F3F5F7] rounded-md flex items-center justify-center flex-shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-contain mix-blend-multiply p-2"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-sans text-sm font-bold text-heading">
+                        {item.name}
+                      </h3>
+                      <p className="text-xs text-body mt-0.5">
+                        Quality: {item.quality}
+                      </p>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="flex items-center gap-1 text-xs text-body hover:text-red-500 mt-1 transition-colors"
+                      >
+                        <X size={12} /> Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Quantity */}
+                  <div className="col-span-4 md:col-span-2">
+                    <div className="inline-flex items-center border border-gray-300 rounded-md">
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
+                      >
+                        <Minus size={14} />
+                      </button>
+                      <span className="w-8 h-8 flex items-center justify-center text-sm font-medium text-heading border-x border-gray-300">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                        className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
+                      >
+                        <Plus size={14} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="col-span-4 md:col-span-2">
+                    <span className="font-sans text-sm text-heading">
+                      ${item.price.toFixed(2)}
+                    </span>
+                  </div>
+
+                  {/* Subtotal */}
+                  <div className="col-span-4 md:col-span-3 text-right">
+                    <span className="font-sans text-sm font-bold text-heading">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Mobile View */}
+                <div className="flex md:hidden gap-4 py-6 border-b border-gray-100 items-start">
+                  {/* Image */}
+                  <div className="w-24 h-24 bg-[#F3F5F7] rounded-md flex items-center justify-center flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-full object-contain mix-blend-multiply p-2"
                     />
                   </div>
-                  <div>
-                    <h3 className="font-sans text-sm font-bold text-heading">
-                      {item.name}
-                    </h3>
-                    <p className="text-xs text-body mt-0.5">
-                      Quality: {item.quality}
-                    </p>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="flex items-center gap-1 text-xs text-body hover:text-red-500 mt-1 transition-colors"
-                    >
-                      <X size={12} /> Remove
-                    </button>
+
+                  {/* Details */}
+                  <div className="flex-1 flex flex-col min-w-0">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-sans text-sm font-bold text-heading truncate pr-2">
+                        {item.name}
+                      </h3>
+                      <span className="font-sans text-sm font-bold text-heading shrink-0">
+                        ${item.price.toFixed(2)}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center mt-1 text-[#7C797A]">
+                      <p className="text-xs">Quality: {item.quality}</p>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="p-1 hover:text-red-500 transition-colors"
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+
+                    <div className="mt-3">
+                      <div className="inline-flex items-center border border-gray-300 rounded-md">
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
+                        >
+                          <Minus size={14} />
+                        </button>
+                        <span className="w-8 h-8 flex items-center justify-center text-sm font-medium text-heading border-x border-gray-300 w-10">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
+                        >
+                          <Plus size={14} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                {/* Quantity */}
-                <div className="col-span-4 md:col-span-2">
-                  <div className="inline-flex items-center border border-gray-300 rounded-md">
-                    <button
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
-                    >
-                      <Minus size={14} />
-                    </button>
-                    <span className="w-8 h-8 flex items-center justify-center text-sm font-medium text-heading border-x border-gray-300">
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="w-8 h-8 flex items-center justify-center text-heading hover:bg-gray-50"
-                    >
-                      <Plus size={14} />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Price */}
-                <div className="col-span-4 md:col-span-2">
-                  <span className="font-sans text-sm text-heading">
-                    ${item.price.toFixed(2)}
-                  </span>
-                </div>
-
-                {/* Subtotal */}
-                <div className="col-span-4 md:col-span-3 text-right">
-                  <span className="font-sans text-sm font-bold text-heading">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </span>
                 </div>
               </div>
             ))}
@@ -228,7 +302,7 @@ const Cart = () => {
                 </span>
               </div>
 
-              {/* Total */}
+              {/* Total & Checkout */}
               <div className="flex justify-between items-center mt-3 mb-5">
                 <span className="font-sans text-base font-bold text-heading">
                   Total
@@ -238,9 +312,12 @@ const Cart = () => {
                 </span>
               </div>
 
-              <button className="w-full  bg-[#001F3F] text-white font-sans font-bold text-sm py-3.5 rounded-lg hover:bg-black/90 transition-colors">
+              <Link
+                to="/checkout"
+                className="w-full bg-[#001F3F] text-white font-sans font-bold text-sm py-3.5 rounded-lg hover:bg-black/90 transition-colors block text-center"
+              >
                 Checkout
-              </button>
+              </Link>
             </div>
           </div>
         </div>

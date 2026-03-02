@@ -46,13 +46,13 @@ const FeaturedProducts = () => {
 
   return (
     <section className="container mx-auto px-6 md:px-12 lg:px-28 py-16">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-8 gap-4">
         <div className="flex items-center gap-3">
           <h2 className="font-heading text-3xl md:text-4xl font-medium text-heading">
             Featured
           </h2>
           <div className="relative">
-            <select className="appearance-none border border-[#001F3F] rounded px-3 py-2 pr-6 w-[85px] font-sans font-bold text-sm text-[#001F3F] bg-white focus:outline-none cursor-pointer truncate">
+            <select className="appearance-none border border-[#001F3F] rounded px-3 py-2 pr-6 me-2 w-[70px] font-sans font-bold text-sm text-[#001F3F] bg-white focus:outline-none cursor-pointer truncate">
               <option value="new">New</option>
               <option value="popular">Popular</option>
               <option value="best-selling">Best Selling</option>
