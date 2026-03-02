@@ -312,9 +312,12 @@ const Cart = () => {
                 </span>
               </div>
 
-              <button className="w-full bg-[#001F3F] text-white font-sans font-bold text-sm py-3.5 rounded-lg hover:bg-black/90 transition-colors">
+              <Link
+                to="/checkout"
+                className="w-full bg-[#001F3F] text-white font-sans font-bold text-sm py-3.5 rounded-lg hover:bg-black/90 transition-colors block text-center"
+              >
                 Checkout
-              </button>
+              </Link>
             </div>
           </div>
         </div>

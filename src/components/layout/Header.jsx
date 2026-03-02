@@ -117,7 +117,7 @@ const Header = () => {
             <Search size={20} strokeWidth={1.5} />
           </button>
           <Link
-            to="/login"
+            to="/account"
             className="hidden md:block hover:text-gray-600 transition-colors"
           >
             <CircleUser size={20} strokeWidth={1.5} />
@@ -186,11 +186,11 @@ const Header = () => {
             <Search size={20} /> Search
           </button>
           <Link
-            to="/login"
+            to="/account"
             className="flex items-center gap-2 text-heading font-medium"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <CircleUser size={20} /> Login
+            <CircleUser size={20} /> Account
           </Link>
         </div>
       </div>

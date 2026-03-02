@@ -55,6 +55,8 @@ const cartReducer = (state, action) => {
             : i
         ),
       };
+    case "CLEAR_CART":
+      return { ...state, items: [] };
     case "TOGGLE_FLYOUT":
       return { ...state, flyoutOpen: !state.flyoutOpen };
     case "CLOSE_FLYOUT":
@@ -89,6 +91,7 @@ export const CartProvider = ({ children }) => {
     (id, quantity) => dispatch({ type: "UPDATE_QUANTITY", id, quantity }),
     []
   );
+  const clearCart = useCallback(() => dispatch({ type: "CLEAR_CART" }), []);
   const toggleFlyout = useCallback(
     () => dispatch({ type: "TOGGLE_FLYOUT" }),
     []
@@ -112,6 +115,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
+        clearCart,
         toggleFlyout,
         closeFlyout,
         openFlyout,

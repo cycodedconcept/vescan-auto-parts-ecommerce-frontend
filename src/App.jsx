@@ -11,6 +11,12 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderComplete from "./pages/OrderComplete";
+import Account from "./pages/Account";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Contact from "./pages/Contact";
 import ProductDetail from "./pages/ProductDetail";
 import { CartProvider } from "./context/CartContext";
 import FlyoutCart from "./components/cart/FlyoutCart";
@@ -29,12 +35,18 @@ function App() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Home />} />
               <Route path="shop" element={<Shop />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="product/:id" element={<ProductDetail />} />
             </Route>
 
-            {/* Cart Route - No Newsletter */}
+            {/* Cart & Checkout Routes - No Newsletter */}
             <Route path="/" element={<CartLayout />}>
               <Route path="cart" element={<Cart />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="order-complete" element={<OrderComplete />} />
+              <Route path="account" element={<Account />} />
+              <Route path="contact" element={<Contact />} />
             </Route>
 
             {/* Catch all - redirect to home */}
