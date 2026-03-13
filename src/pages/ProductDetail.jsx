@@ -12,6 +12,7 @@ import { products } from "../data/products";
 import CustomerReviews from "../components/features/product/CustomerReviews";
 import YouMightAlsoLike from "../components/features/product/YouMightAlsoLike";
 import { useCart } from "../context/CartContext";
+import { alertSuccess } from "../utils/alert";
 
 const TimerBox = ({ value, label }) => (
   <div className="flex flex-col items-center">
@@ -319,6 +320,7 @@ const ProductDetail = () => {
             onClick={() => {
               addToCart(product, quantity);
               openFlyout();
+              alertSuccess("Added to cart!");
             }}
             className="w-full h-12 bg-[#001F3F] text-white font-sans font-bold rounded-lg hover:bg-black/90 transition-colors mb-6"
           >

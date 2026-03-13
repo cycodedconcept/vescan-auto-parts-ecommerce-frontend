@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { Mail } from "lucide-react";
+import { alertSuccess } from "../../utils/alert";
 
 const Newsletter = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email) return;
+    alertSuccess("You're subscribed! Thanks for joining.");
+    setEmail("");
+  };
+
   return (
     <section className="w-full flex justify-center bg-[#141718]">
       <div className="w-full max-w-[1440px] h-[360px] relative flex items-center justify-center overflow-hidden">
@@ -22,15 +33,17 @@ const Newsletter = () => {
             Sign up for deals, new products and promotions
           </p>
 
-          <form className="w-full max-w-md flex items-center border-b border-gray-400 pb-2 focus-within:border-white transition-colors">
+          <form onSubmit={handleSubmit} className="w-full max-w-md flex items-center border-b border-gray-400 pb-2 focus-within:border-white transition-colors">
             <Mail className="text-[#E8ECEF] mr-3" size={20} />
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               className="bg-transparent border-none outline-none text-white placeholder-gray-400 flex-grow font-sans text-sm"
             />
             <button
-              type="button"
+              type="submit"
               className="text-[#E8ECEF] font-sans text-sm font-medium hover:text-white transition-colors uppercase tracking-wider ml-2"
             >
               Sign Up

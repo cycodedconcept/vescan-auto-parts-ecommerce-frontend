@@ -1,4 +1,8 @@
-import api, { USE_MOCK_DATA } from "./api";
+import api from "./api";
+
+// Account endpoints are not yet available on the real API.
+// Keep this true until the backend provides profile/addresses/orders/wishlist endpoints.
+const USE_MOCK_DATA = true;
 
 /**
  * Account service – handles all user-account-related API calls.
@@ -86,12 +90,26 @@ const delay = () => new Promise((r) => setTimeout(r, 400));
 
 /** Fetch the logged-in user's profile */
 export const getProfile = async () => {
-  if (USE_MOCK_DATA) {
-    await delay();
-    return mockUser;
+  // Read real user data stored in localStorage on login
+  const stored = localStorage.getItem("vescan_user");
+  if (stored) {
+    const u = JSON.parse(stored);
+    const nameParts = (u.name ?? "").trim().split(" ");
+    const firstName = nameParts[0] ?? "";
+    const lastName = nameParts.slice(1).join(" ") ?? "";
+    return {
+      firstName,
+      lastName,
+      displayName: u.name ?? "",
+      email: u.email ?? "",
+      country: u.country ?? "",
+      phone_number: u.phone_number ?? "",
+      avatar: null,
+    };
   }
-  const { data } = await api.get("/account/profile");
-  return data;
+  // Fallback to mock if not logged in (shouldn't normally happen on this page)
+  await delay();
+  return mockUser;
 };
 
 /** Update account details (name, email, phone, password) */

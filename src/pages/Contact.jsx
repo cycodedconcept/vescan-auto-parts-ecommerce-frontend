@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Values from "../components/home/Values";
+import { alertSuccess } from "../utils/alert";
 
 /* ───────── Contact Info Card ───────── */
 const InfoCard = ({ icon, label, value }) => (
@@ -28,7 +29,8 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: wire to API
+    alertSuccess("Message sent! We'll get back to you shortly.");
+    setForm({ fullName: "", email: "", message: "" });
   };
 
   return (

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { X, Minus, Plus } from "lucide-react";
 import { useCart } from "../../context/CartContext";
+import Swal from "sweetalert2";
 
 const FlyoutCart = () => {
   const {
@@ -12,8 +13,22 @@ const FlyoutCart = () => {
     subtotal,
   } = useCart();
 
-  // Calculate a simple total (subtotal + shipping) for flyout
   const total = subtotal + (subtotal > 0 ? 135 : 0);
+
+  const handleRemove = (item) => {
+    Swal.fire({
+      title: "Remove item?",
+      text: `Remove "${item.name}" from your cart?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#001F3F",
+      cancelButtonColor: "#aaa",
+      confirmButtonText: "Yes, remove it",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) removeFromCart(item.id);
+    });
+  };
 
   return (
     <>
@@ -79,7 +94,7 @@ const FlyoutCart = () => {
                     {/* Remove + Quantity row */}
                     <div className="flex items-center justify-between mt-2">
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => handleRemove(item)}
                         className="text-body hover:text-red-500 transition-colors"
                       >
                         <X size={14} />
