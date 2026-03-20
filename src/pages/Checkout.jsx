@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { placeOrder } from "../services/orderService";
+import { alertSuccess, alertError } from "../utils/alert";
 
 const Checkout = () => {
   const { cart, removeFromCart, updateQuantity, subtotal } = useCart();
@@ -56,8 +57,10 @@ const Checkout = () => {
       setAppliedCoupon({ code, discount });
       setCouponInput("");
       setCouponError(false);
+      alertSuccess(`Coupon "${code}" applied! -₦${discount}`);
     } else {
       setCouponError(true);
+      alertError("Invalid coupon code.");
     }
   };
 
@@ -92,6 +95,7 @@ const Checkout = () => {
       navigate("/order-complete", { state: orderData });
     } catch (error) {
       console.error("Failed to place order:", error);
+      alertError("Failed to place order. Please try again.");
     } finally {
       setIsPlacingOrder(false);
     }

@@ -1,34 +1,33 @@
 import axios from "axios";
 
+// Base URL for all API requests
+const BASE_URL = "https://zubitechnologies.com/obd_final_apis/api";
+
 // Create an Axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api", // Default to local backend
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: BASE_URL,
   timeout: 10000,
 });
 
 // Mock Mode Toggle (Set to true to bypass backend)
-export const USE_MOCK_DATA = true;
+export const USE_MOCK_DATA = false;
 
-// Request Interceptor (e.g., for attaching tokens)
+// Request Interceptor — attach JWT token if present
 api.interceptors.request.use(
   (config) => {
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+    const token = localStorage.getItem("vescan_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor (e.g., for global error handling)
+// Response Interceptor — global error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle 401 (Unauthorized) or other errors globally
     console.error("API Error:", error.response || error.message);
     return Promise.reject(error);
   }

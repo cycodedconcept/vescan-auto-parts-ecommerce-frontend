@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import { alertSuccess } from "../../utils/alert";
 
 const ProductCard = ({ product }) => {
   const { addToCart, openFlyout } = useCart();
@@ -9,6 +10,7 @@ const ProductCard = ({ product }) => {
     e.preventDefault();
     addToCart(product);
     openFlyout();
+    alertSuccess("Added to cart!");
   };
 
   return (
@@ -80,11 +82,11 @@ const ProductCard = ({ product }) => {
         {/* Price */}
         <div className="flex items-center gap-2 mt-1">
           <span className="font-sans font-bold text-sm text-heading">
-            ${product.price.toFixed(2)}
+            ₦{product.price.toLocaleString()}
           </span>
           {product.originalPrice > product.price && (
             <span className="font-sans text-xs text-gray-400 line-through">
-              ${product.originalPrice.toFixed(2)}
+              ₦{product.originalPrice.toLocaleString()}
             </span>
           )}
         </div>

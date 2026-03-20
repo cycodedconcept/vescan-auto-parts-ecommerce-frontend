@@ -1,14 +1,20 @@
 import { useRef, useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import ProductCard from "../common/ProductCard";
-import { products } from "../../data/products";
+import { getProducts } from "../../services/productService";
 
 const FeaturedProducts = () => {
   const scrollContainerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [products, setProducts] = useState([]);
 
-  // Calculate number of dots based on items (assuming 4 items per view, or just fixed 5 for now as per design)
   const totalDots = 5;
+
+  useEffect(() => {
+    getProducts(1)
+      .then((result) => setProducts(result.products))
+      .catch((err) => console.error("Failed to load featured products:", err));
+  }, []);
 
   const handleScroll = () => {
     const container = scrollContainerRef.current;

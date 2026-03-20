@@ -2,12 +2,28 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Minus, Plus, X, Ticket, ChevronLeft } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, subtotal } = useCart();
   const navigate = useNavigate();
   const [shipping, setShipping] = useState("free");
   const [coupon, setCoupon] = useState("");
+
+  const handleRemove = (item) => {
+    Swal.fire({
+      title: "Remove item?",
+      text: `Remove "${item.name}" from your cart?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#001F3F",
+      cancelButtonColor: "#aaa",
+      confirmButtonText: "Yes, remove it",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) removeFromCart(item.id);
+    });
+  };
 
   const shippingCosts = {
     free: 0,
@@ -124,7 +140,7 @@ const Cart = () => {
                         Quality: {item.quality}
                       </p>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => handleRemove(item)}
                         className="flex items-center gap-1 text-xs text-body hover:text-red-500 mt-1 transition-colors"
                       >
                         <X size={12} /> Remove
@@ -197,7 +213,7 @@ const Cart = () => {
                     <div className="flex justify-between items-center mt-1 text-[#7C797A]">
                       <p className="text-xs">Quality: {item.quality}</p>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => handleRemove(item)}
                         className="p-1 hover:text-red-500 transition-colors"
                       >
                         <X size={16} />

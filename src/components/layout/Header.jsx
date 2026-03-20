@@ -9,11 +9,13 @@ import {
 } from "lucide-react";
 import logo from "../../assets/logo3.png";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cartCount, openFlyout } = useCart();
+  const { isAuthenticated } = useAuth();
 
   const navLinkStyles =
     "text-sm font-sans text-heading leading-6 hover:text-gray-600 transition-colors flex items-center gap-1";
@@ -118,9 +120,10 @@ const Header = () => {
           </button>
           <Link
             to="/account"
-            className="hidden md:block hover:text-gray-600 transition-colors"
+            className="relative hidden md:block hover:text-gray-600 transition-colors"
           >
             <CircleUser size={20} strokeWidth={1.5} />
+            <span className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-white ${isAuthenticated ? "bg-green-500" : "bg-red-500"}`} />
           </Link>
           <button
             onClick={openFlyout}
@@ -187,10 +190,14 @@ const Header = () => {
           </button>
           <Link
             to="/account"
-            className="flex items-center gap-2 text-heading font-medium"
+            className="relative flex items-center gap-2 text-heading font-medium"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <CircleUser size={20} /> Account
+            <span className="relative">
+              <CircleUser size={20} />
+              <span className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-white ${isAuthenticated ? "bg-green-500" : "bg-red-500"}`} />
+            </span>
+            Account
           </Link>
         </div>
       </div>

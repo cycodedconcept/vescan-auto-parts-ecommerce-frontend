@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Camera, Pencil } from "lucide-react";
+import { Camera, Pencil, ChevronDown } from "lucide-react";
+import Swal from "sweetalert2";
+import { alertSuccess, alertError } from "../utils/alert";
+import { useAuth } from "../context/AuthContext";
 import {
   getProfile,
   updateProfile,
@@ -47,21 +50,26 @@ const AccountTab = ({ profile, onSave }) => {
     lastName: profile?.lastName ?? "",
     displayName: profile?.displayName ?? "",
     email: profile?.email ?? "",
+    country: profile?.country ?? "",
+    phone_number: profile?.phone_number ?? "",
     oldPassword: "",
     newPassword: "",
     repeatNewPassword: "",
   });
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
 
   const set = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
   const handleSave = async () => {
     setSaving(true);
-    await onSave(form);
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    try {
+      await onSave(form);
+      alertSuccess("Profile updated successfully!");
+    } catch {
+      alertError("Failed to save changes. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -98,6 +106,19 @@ const AccountTab = ({ profile, onSave }) => {
         onChange={set("email")}
         placeholder="Email"
       />
+      <Field
+        label="Phone Number"
+        type="tel"
+        value={form.phone_number}
+        onChange={set("phone_number")}
+        placeholder="Phone number"
+      />
+      <Field
+        label="Country"
+        value={form.country}
+        onChange={set("country")}
+        placeholder="Country"
+      />
 
       <div className="pt-2">
         <h3 className="font-heading text-xl text-heading mb-5">Password</h3>
@@ -132,7 +153,7 @@ const AccountTab = ({ profile, onSave }) => {
           disabled={saving}
           className="bg-[#001F3F] text-white font-sans font-bold text-sm px-8 py-3.5 rounded-md hover:bg-black/90 transition-colors disabled:opacity-60"
         >
-          {saving ? "Saving…" : saved ? "Saved!" : "Save Changes"}
+          {saving ? "Saving…" : "Save Changes"}
         </button>
       </div>
     </div>
@@ -149,9 +170,15 @@ const AddressCard = ({ title, address, onSave }) => {
 
   const handleSave = async () => {
     setSaving(true);
-    await onSave(form);
-    setSaving(false);
-    setEditing(false);
+    try {
+      await onSave(form);
+      alertSuccess("Address saved!");
+      setEditing(false);
+    } catch {
+      alertError("Failed to save address. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const summaryName = address ? `${address.firstName} ${address.lastName}` : "";
@@ -405,9 +432,55 @@ const WishlistTab = ({ wishlist, onRemove }) => {
   );
 };
 
+// ── Mobile Tab Dropdown ───────────────────────────────────────────────────────
+const TabDropdown = ({ activeTab, tabs, onSelect, onLogout }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const activeLabel = tabs.find((t) => t.id === activeTab)?.label ?? "Account";
+
+  return (
+    <div className="relative w-full">
+      <button
+        onClick={() => setIsOpen((o) => !o)}
+        className="flex w-full items-center justify-between border-2 border-[#7C797A] rounded-lg px-5 py-3 font-sans text-sm text-heading bg-white"
+      >
+        <span>{activeLabel}</span>
+        <ChevronDown
+          size={14}
+          className={`text-heading transition-transform ml-4 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="w-full bg-white border border-gray-100 rounded-lg shadow-lg mt-1 z-20 overflow-hidden">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => { onSelect(tab.id); setIsOpen(false); }}
+              className={`w-full text-left px-5 py-3 font-sans text-sm transition-colors ${
+                activeTab === tab.id
+                  ? "bg-gray-100 text-heading font-medium"
+                  : "text-body hover:bg-gray-50"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+          <button
+            onClick={() => { setIsOpen(false); onLogout(); }}
+            className="w-full text-left px-5 py-3 font-sans text-sm text-red-500 hover:bg-red-50 transition-colors border-t border-gray-100"
+          >
+            Log Out
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ── Main Account Page ─────────────────────────────────────────────────────────
 const Account = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const [activeTab, setActiveTab] = useState("account");
   const [profile, setProfile] = useState(null);
   const [addresses, setAddresses] = useState(null);
@@ -460,8 +533,18 @@ const Account = () => {
   };
 
   const handleLogout = () => {
-    // When backend is ready: clear auth token here before navigating
-    navigate("/login");
+    Swal.fire({
+      title: "Log out?",
+      text: "Are you sure you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#001F3F",
+      cancelButtonColor: "#aaa",
+      confirmButtonText: "Yes, log out",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) { logout(); navigate("/login"); }
+    });
   };
 
   // Avatar initials fallback
@@ -506,34 +589,13 @@ const Account = () => {
         {/* Name */}
         <p className="font-heading text-lg text-heading">{displayName}</p>
 
-        {/* Tab select */}
-        <div className="relative w-full">
-          <select
-            value={activeTab}
-            onChange={(e) => setActiveTab(e.target.value)}
-            className="w-full border border-gray-200 rounded-lg px-4 py-3 font-sans text-sm text-heading focus:outline-none focus:border-heading appearance-none bg-white"
-          >
-            {TABS.map((tab) => (
-              <option key={tab.id} value={tab.id}>
-                {tab.label}
-              </option>
-            ))}
-            <option value="logout">Log Out</option>
-          </select>
-          {/* Chevron icon */}
-          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-body">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </span>
-        </div>
-
-        {activeTab === "logout" && (
-          <button
-            onClick={handleLogout}
-            className="w-full border border-red-200 text-red-500 font-sans text-sm font-semibold py-3 rounded-md hover:bg-red-50 transition-colors"
-          >
-            Confirm Log Out
-          </button>
-        )}
+        {/* Tab dropdown */}
+        <TabDropdown
+          activeTab={activeTab}
+          tabs={TABS}
+          onSelect={setActiveTab}
+          onLogout={handleLogout}
+        />
       </div>
 
       {/* ── Desktop: two-column layout ────────────────────────────────────── */}
